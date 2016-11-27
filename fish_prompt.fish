@@ -79,4 +79,5 @@ function fish_prompt
   show_user
   show_pwd
   show_prompt
+  eval $HOME/.bubu/tmux-gitbar/update-gitbar
 end
