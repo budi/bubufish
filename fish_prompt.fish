@@ -21,11 +21,11 @@ function show_status -d "Function to show the current status"
   if [ $RETVAL -ne 0 ]
     prompt_segment red white " ▲ "
     set pad ""
-    end
+  end
   if [ -n "$SSH_CLIENT" ]
-      prompt_segment blue white " SSH: "
-      set pad ""
-    end
+    prompt_segment blue white " SSH: "
+    set pad ""
+  end
 end
 
 function show_virtualenv -d "Show active python virtual environments"
@@ -33,22 +33,6 @@ function show_virtualenv -d "Show active python virtual environments"
     set -l venvname (basename "$VIRTUAL_ENV")
     prompt_segment normal white " ($venvname)"
   end
-end
-
-## Show user if not default
-function show_user -d "Show user"
-  if [ "$USER" != "$default_user" -o -n "$SSH_CLIENT" ]
-    set -l host (hostname -s)
-    set -l who (whoami)
-    prompt_segment normal yellow " $who"
-
-    # Skip @ bit if hostname == username
-    if [ "$USER" != "$HOST" ]
-      prompt_segment normal white "@"
-      prompt_segment normal green "$host "
-      set pad ""
-    end
-    end
 end
 
 # Show directory
@@ -60,13 +44,13 @@ end
 # Show prompt w/ privilege cue
 function show_prompt -d "Shows prompt with cue for current priv"
   set -l uid (id -u $USER)
-    if [ $uid -eq 0 ]
+  if [ $uid -eq 0 ]
     prompt_segment red white " ! "
     set_color normal
     echo -n -s " "
   else
     prompt_segment normal white " \$ "
-    end
+  end
 
   set_color normal
 end
@@ -76,7 +60,6 @@ function fish_prompt
   set -g RETVAL $status
   show_status
   show_virtualenv
-  show_user
   show_pwd
   show_prompt
   eval $HOME/.bubu/tmux-gitbar/update-gitbar
