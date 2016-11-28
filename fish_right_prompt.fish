@@ -6,20 +6,16 @@ function get_git_status -d "Gets the current git status"
 
     if [ "$dirty" != "0" ]
       set_color -b normal
-      set_color red
-      echo "$dirty changed file"
-      if [ "$dirty" != "1" ]
-        echo "s"
-      end
+      set_color blue
+      echo "✚ $dirty"
       echo " "
-      set_color -b red
+      set_color -b black
+      set_color purple
+      echo ""
+      set_color -b purple
       set_color black
-    else
-      set_color -b white
-      set_color black
+      echo " ⎇  $ref "
     end
-
-    echo " $ref "
     set_color normal
    end
 end
