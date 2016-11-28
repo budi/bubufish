@@ -19,11 +19,11 @@ end
 ## Function to show current status
 function show_status -d "Function to show the current status"
   if [ $RETVAL -ne 0 ]
-    prompt_segment red white " ▲ "
+    prompt_segment normal red "✖ "
     set pad ""
   end
   if [ -n "$SSH_CLIENT" ]
-    prompt_segment blue white " SSH: "
+    prompt_segment normal blue "SSH: "
     set pad ""
   end
 end
@@ -45,11 +45,11 @@ end
 function show_prompt -d "Shows prompt with cue for current priv"
   set -l uid (id -u $USER)
   if [ $uid -eq 0 ]
-    prompt_segment red white " ! "
+    prompt_segment normal red " ✖ "
     set_color normal
     echo -n -s " "
   else
-    prompt_segment normal white " \$ "
+    prompt_segment normal white "→ "
   end
 
   set_color normal
