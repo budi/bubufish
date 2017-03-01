@@ -36,6 +36,15 @@ function show_pwd -d "Show the current directory"
   prompt_segment normal 5F63AB ""
 end
 
+# Show virtualenv
+# function show_virtualenv -d "Show active python virtual environments"
+#   if set -q VIRTUAL_ENV
+#     set -l venvname (basename "$VIRTUAL_ENV")
+#     prompt_segment AF8EF9 282A36 " $pwd "
+#     prompt_segment normal green "($venvname) "
+#   end
+# end
+
 # Show prompt w/ privilege cue
 function show_prompt -d "Shows prompt with cue for current priv"
   if test -e .ruby-version
@@ -52,6 +61,9 @@ function fish_prompt
   set -g RETVAL $status
   show_status
   show_pwd
+  # show_virtualenv
   show_prompt
-  eval $HOME/.bubu/tmux-gitbar/update-gitbar
+  if [ "$TMUX" != "" ]
+    eval $HOME/.bubu/tmux-gitbar/update-gitbar
+  end
 end
